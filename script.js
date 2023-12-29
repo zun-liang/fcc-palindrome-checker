@@ -4,39 +4,32 @@ const resultDiv = document.getElementById("result");
 
 const cleanText = (text) => {
   const regex = /[a-z0-9]+/gi;
-  return text.match(regex)?.join("");
+  return text.match(regex)?.join("").toLowerCase();
 };
 
 const splitInHalf = (cleanedText) => {
   const length = cleanedText?.length;
-  let firstHalf = "";
-  let secondHalf = "";
-  for (let i = 0; i < length / 2; i++) {
-    firstHalf += cleanedText[i];
-  }
-  if (cleanedText?.length % 2 === 0) {
-    for (let i = length / 2; i < length; i++) {
-      secondHalf += cleanedText[i];
-    }
-  } else {
-    for (let i = length / 2 + 1; i < length; i++) {
-      secondHalf += cleanedText[i];
-    }
-  }
-  return firstHalf === secondHalf.split("").reverse().join("");
+  const middleIndex = Math.floor(length / 2);
+  const firstHalf = cleanedText?.substring(0, middleIndex);
+  const secondHalf = cleanedText?.substring(
+    length % 2 === 0 ? middleIndex : middleIndex + 1
+  );
+  return firstHalf === secondHalf?.split("").reverse().join("");
 };
 
-const checkText = (e) => {
-  e.preventDefault();
+const checkText = () => {
   const text = textInput.value;
   const cleanedText = cleanText(text);
   const result = splitInHalf(cleanedText);
   if (text === "") {
     alert("Please input a value");
+  } else if (cleanedText.length === 1) {
+    resultDiv.classList.remove("hide");
+    resultDiv.innerHTML = `<p><b>${text}</b> is a palindrome</p>`;
   } else {
     if (result) {
       resultDiv.classList.remove("hide");
-      resultDiv.innerHTML = `<p><b>${cleanedText}</b> is a palindrome</p>`;
+      resultDiv.innerHTML = `<p><b>${text}</b> is a palindrome</p>`;
     } else {
       resultDiv.classList.remove("hide");
       resultDiv.innerHTML = `<p><b>${text}</b> is not a palindrome</p>`;
