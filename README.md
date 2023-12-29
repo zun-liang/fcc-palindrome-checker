@@ -1,4 +1,4 @@
-# freeCodeCamp - Build a Markdown Previewer
+# freeCodeCamp - Build a Palindrome Checker
 
 This is a solution to the [Build a Palindrome Checker Project on freeCodeCamp](https://www.freecodecamp.org/learn/javascript-algorithms-and-data-structures-v8/build-a-palindrome-checker-project/build-a-palindrome-checker).
 
